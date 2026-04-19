@@ -1,56 +1,56 @@
 resources:
   jobs:
-    end_to_end_healthcare_project_job:
-      name: end-to-end-healthcare-project-job
+    End_to_end_Project_Job:
+      name: End-to-end Project Job
       tasks:
-        - task_key: diagnosis_raw_ingestion_task
+        - task_key: Diagnoisis_raw_ingestion_task
           notebook_task:
-            notebook_path: /Workspace/Users/anirvankafka_gmail.com#ext#@anirvankafkagmail.onmicrosoft.com/Azure-Databricks-Real-World-Healthcare-End-to-End-Project/bronze/diagnosis_raw_data_ingestion
+            notebook_path: /Workspace/Users/avipul313_gmail.com#ext#@avipul313gmail.onmicrosoft.com/Azure-Databricks-Real-World-Healthcare-End-to-End-Project/bronze/diagnosis_raw_data_ingestion
             source: WORKSPACE
-        - task_key: dim_diagnosis_ingestion
-          depends_on:
-            - task_key: diagnosis_raw_ingestion_task
+        - task_key: Patients_raw_ingestion_task
           notebook_task:
-            notebook_path: /Workspace/Users/anirvankafka_gmail.com#ext#@anirvankafkagmail.onmicrosoft.com/Azure-Databricks-Real-World-Healthcare-End-to-End-Project/silver/dim_diagnosis_ingestion
+            notebook_path: /Workspace/Users/avipul313_gmail.com#ext#@avipul313gmail.onmicrosoft.com/Azure-Databricks-Real-World-Healthcare-End-to-End-Project/bronze/patients_raw_data_ingestion
+            source: WORKSPACE
+        - task_key: dim_diagonsis_ingestion
+          depends_on:
+            - task_key: Diagnoisis_raw_ingestion_task
+          notebook_task:
+            notebook_path: /Workspace/Users/avipul313_gmail.com#ext#@avipul313gmail.onmicrosoft.com/Azure-Databricks-Real-World-Healthcare-End-to-End-Project/silver/dim_diagnosis_ingestion
+            source: WORKSPACE
+        - task_key: dim_patient_ingestion
+          depends_on:
+            - task_key: Patients_raw_ingestion_task
+          notebook_task:
+            notebook_path: /Workspace/Users/avipul313_gmail.com#ext#@avipul313gmail.onmicrosoft.com/Azure-Databricks-Real-World-Healthcare-End-to-End-Project/silver/dim_patient_ingestion
             source: WORKSPACE
         - task_key: hospitals_raw_ingestion_task
           notebook_task:
-            notebook_path: /Workspace/Users/anirvankafka_gmail.com#ext#@anirvankafkagmail.onmicrosoft.com/Azure-Databricks-Real-World-Healthcare-End-to-End-Project/bronze/hospitals_raw_data_ingestion
+            notebook_path: /Workspace/Users/avipul313_gmail.com#ext#@avipul313gmail.onmicrosoft.com/Azure-Databricks-Real-World-Healthcare-End-to-End-Project/bronze/hospitals_raw_data_ingestion
             source: WORKSPACE
         - task_key: dim_hospital_ingestion
           depends_on:
             - task_key: hospitals_raw_ingestion_task
           notebook_task:
-            notebook_path: /Workspace/Users/anirvankafka_gmail.com#ext#@anirvankafkagmail.onmicrosoft.com/Azure-Databricks-Real-World-Healthcare-End-to-End-Project/silver/dim_hospital_ingestion
+            notebook_path: /Workspace/Users/avipul313_gmail.com#ext#@avipul313gmail.onmicrosoft.com/Azure-Databricks-Real-World-Healthcare-End-to-End-Project/silver/dim_hospital_ingestion
             source: WORKSPACE
-        - task_key: patients_raw_ingestion_task
+        - task_key: visit_raws_ingestion_task
           notebook_task:
-            notebook_path: /Workspace/Users/anirvankafka_gmail.com#ext#@anirvankafkagmail.onmicrosoft.com/Azure-Databricks-Real-World-Healthcare-End-to-End-Project/bronze/patients_raw_data_ingestion
-            source: WORKSPACE
-        - task_key: dim_patient_ingestion
-          depends_on:
-            - task_key: patients_raw_ingestion_task
-          notebook_task:
-            notebook_path: /Workspace/Users/anirvankafka_gmail.com#ext#@anirvankafkagmail.onmicrosoft.com/Azure-Databricks-Real-World-Healthcare-End-to-End-Project/silver/dim_patient_ingestion
+            notebook_path: /Workspace/Users/avipul313_gmail.com#ext#@avipul313gmail.onmicrosoft.com/Azure-Databricks-Real-World-Healthcare-End-to-End-Project/bronze/visits_raw_data_ingestion
             source: WORKSPACE
         - task_key: fact_visit_ingestion
           depends_on:
+            - task_key: dim_diagonsis_ingestion
             - task_key: dim_patient_ingestion
+            - task_key: visit_raws_ingestion_task
             - task_key: dim_hospital_ingestion
-            - task_key: dim_diagnosis_ingestion
-            - task_key: visits_raw_ingestion_task
           notebook_task:
-            notebook_path: /Workspace/Users/anirvankafka_gmail.com#ext#@anirvankafkagmail.onmicrosoft.com/Azure-Databricks-Real-World-Healthcare-End-to-End-Project/silver/fact_visit_ingestion
+            notebook_path: /Workspace/Users/avipul313_gmail.com#ext#@avipul313gmail.onmicrosoft.com/Azure-Databricks-Real-World-Healthcare-End-to-End-Project/silver/fact_visit_ingestion
             source: WORKSPACE
-        - task_key: resubmission_analysis
+        - task_key: readmission_analysis
           depends_on:
             - task_key: fact_visit_ingestion
           notebook_task:
-            notebook_path: /Workspace/Users/anirvankafka_gmail.com#ext#@anirvankafkagmail.onmicrosoft.com/Azure-Databricks-Real-World-Healthcare-End-to-End-Project/gold/resubmission_analysis
-            source: WORKSPACE
-        - task_key: visits_raw_ingestion_task
-          notebook_task:
-            notebook_path: /Workspace/Users/anirvankafka_gmail.com#ext#@anirvankafkagmail.onmicrosoft.com/Azure-Databricks-Real-World-Healthcare-End-to-End-Project/bronze/visits_raw_data_ingestion
+            notebook_path: /Workspace/Users/avipul313_gmail.com#ext#@avipul313gmail.onmicrosoft.com/Azure-Databricks-Real-World-Healthcare-End-to-End-Project/gold/readmission_analysis
             source: WORKSPACE
       queue:
         enabled: true
