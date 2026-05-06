@@ -1,0 +1,570 @@
+{
+  "datasets": [
+    {
+      "name": "d5bdd57d",
+      "displayName": "hospital_disease_kpi",
+      "config": {
+        "version": "1.1",
+        "source": "healthcare.gold.hospital_disease_kpi",
+        "dimensions": [
+          {
+            "name": "hospital_id",
+            "expr": "source.hospital_id",
+            "displayName": "Hospital Id"
+          },
+          {
+            "name": "hospital_name",
+            "expr": "source.hospital_name",
+            "displayName": "Hospital Name"
+          },
+          {
+            "name": "diagnosis_desc",
+            "expr": "source.diagnosis_desc",
+            "displayName": "Diagnosis Desc"
+          },
+          {
+            "name": "total_visits",
+            "expr": "source.total_visits",
+            "displayName": "Total Visits"
+          },
+          {
+            "name": "total_readmissions",
+            "expr": "source.total_readmissions",
+            "displayName": "Total Readmissions"
+          },
+          {
+            "name": "readmission_rate",
+            "expr": "source.readmission_rate",
+            "displayName": "Readmission Rate"
+          },
+          {
+            "name": "total_cost",
+            "expr": "source.total_cost",
+            "displayName": "Total Cost"
+          },
+          {
+            "name": "avg_cost",
+            "expr": "source.avg_cost",
+            "displayName": "Avg Cost"
+          },
+          {
+            "name": "gold_load_timestamp",
+            "expr": "source.gold_load_timestamp",
+            "displayName": "Gold Load Timestamp"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "bca3539c",
+      "displayName": "fact_visit",
+      "config": {
+        "version": "1.1",
+        "source": "healthcare.silver.fact_visit",
+        "dimensions": [
+          {
+            "name": "diagnosis_code",
+            "expr": "source.diagnosis_code",
+            "displayName": "Diagnosis Code"
+          },
+          {
+            "name": "hospital_id",
+            "expr": "source.hospital_id",
+            "displayName": "Hospital Id"
+          },
+          {
+            "name": "patient_id",
+            "expr": "source.patient_id",
+            "displayName": "Patient Id"
+          },
+          {
+            "name": "visit_id",
+            "expr": "source.visit_id",
+            "displayName": "Visit Id"
+          },
+          {
+            "name": "admission_date",
+            "expr": "source.admission_date",
+            "displayName": "Admission Date"
+          },
+          {
+            "name": "discharge_date",
+            "expr": "source.discharge_date",
+            "displayName": "Discharge Date"
+          },
+          {
+            "name": "cost",
+            "expr": "source.cost",
+            "displayName": "Cost"
+          },
+          {
+            "name": "first_name",
+            "expr": "source.first_name",
+            "displayName": "First Name"
+          },
+          {
+            "name": "last_name",
+            "expr": "source.last_name",
+            "displayName": "Last Name"
+          },
+          {
+            "name": "gender",
+            "expr": "source.gender",
+            "displayName": "Gender"
+          },
+          {
+            "name": "dob",
+            "expr": "source.dob",
+            "displayName": "Dob"
+          },
+          {
+            "name": "patient_city",
+            "expr": "source.patient_city",
+            "displayName": "Patient City"
+          },
+          {
+            "name": "patient_first_last_name_masked",
+            "expr": "source.patient_first_last_name_masked",
+            "displayName": "Patient First Last Name Masked"
+          },
+          {
+            "name": "hospital_name",
+            "expr": "source.hospital_name",
+            "displayName": "Hospital Name"
+          },
+          {
+            "name": "hospital_city",
+            "expr": "source.hospital_city",
+            "displayName": "Hospital City"
+          },
+          {
+            "name": "bed_count",
+            "expr": "source.bed_count",
+            "displayName": "Bed Count"
+          },
+          {
+            "name": "diagnosis_desc",
+            "expr": "source.diagnosis_desc",
+            "displayName": "Diagnosis Desc"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    }
+  ],
+  "pages": [
+    {
+      "name": "0ba80e0d",
+      "displayName": "Dashboard",
+      "layout": [
+        {
+          "widget": {
+            "name": "3c506a20",
+            "multilineTextboxSpec": {
+              "lines": [
+                "# <span style=\"font-size:36px;line-height:1.5;font-family:Arial\">**Business User Dashboard**</span>"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 1,
+            "width": 12,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "hospital-name",
+            "queries": [
+              {
+                "name": "dashboards/01f13faf5e32141ab26e6df6c97b975d/datasets/01f13fb02d501a9b82182e261d27c6d2_hospital_name",
+                "query": {
+                  "datasetName": "d5bdd57d",
+                  "fields": [
+                    {
+                      "name": "hospital_name",
+                      "expression": "`hospital_name`"
+                    },
+                    {
+                      "name": "hospital_name_associativity",
+                      "expression": "COUNT_IF(`associative_filter_predicate_group`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "hospital_name",
+                "showTitle": true
+              },
+              "widgetType": "filter-multi-select",
+              "encodings": {
+                "fields": [
+                  {
+                    "fieldName": "hospital_name",
+                    "queryName": "dashboards/01f13faf5e32141ab26e6df6c97b975d/datasets/01f13fb02d501a9b82182e261d27c6d2_hospital_name"
+                  }
+                ]
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 4,
+            "height": 1
+          }
+        },
+        {
+          "widget": {
+            "name": "65016b93",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "d5bdd57d",
+                  "fields": [
+                    {
+                      "name": "hospital_name",
+                      "expression": "`hospital_name`"
+                    },
+                    {
+                      "name": "sum(total_visits)",
+                      "expression": "SUM(`total_visits`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Total Visits by Hospital",
+                "showTitle": true
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "hospital_name",
+                  "displayName": "Hospital Name",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(total_visits)",
+                  "displayName": "Total Visits",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 9,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "6cdf6ffd",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "d5bdd57d",
+                  "fields": [
+                    {
+                      "name": "hospital_name",
+                      "expression": "`hospital_name`"
+                    },
+                    {
+                      "name": "sum(total_readmissions)",
+                      "expression": "SUM(`total_readmissions`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Readmissions by Hospital",
+                "showTitle": true
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "hospital_name",
+                  "displayName": "Hospital Name",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(total_readmissions)",
+                  "displayName": "Total Readmissions",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 9,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "ac34b297",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "d5bdd57d",
+                  "fields": [
+                    {
+                      "name": "hospital_name",
+                      "expression": "`hospital_name`"
+                    },
+                    {
+                      "name": "sum(total_cost)",
+                      "expression": "SUM(`total_cost`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Total Cost by Hospital",
+                "showTitle": true
+              },
+              "mark": {
+                "colors": [
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 2
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 2
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 3
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 4
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 5
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 6
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 7
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 8
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 9
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 10
+                  }
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "hospital_name",
+                  "displayName": "Hospital Name",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(total_cost)",
+                  "format": {
+                    "type": "number-currency",
+                    "currencyCode": "INR",
+                    "abbreviation": "compact"
+                  },
+                  "displayName": "Total Cost",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 3,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "c779cc04",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bca3539c",
+                  "fields": [
+                    {
+                      "name": "measure(count)",
+                      "expression": "MEASURE(`count`)"
+                    },
+                    {
+                      "name": "gender",
+                      "expression": "`gender`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Patient Gender Distribution",
+                "showTitle": true
+              },
+              "widgetType": "pie",
+              "encodings": {
+                "angle": {
+                  "fieldName": "measure(count)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "Count"
+                },
+                "color": {
+                  "fieldName": "gender",
+                  "displayName": "Gender",
+                  "scale": {
+                    "type": "categorical",
+                    "mappings": [
+                      {
+                        "value": "M",
+                        "color": {
+                          "themeColorType": "visualizationColors",
+                          "position": 5
+                        }
+                      },
+                      {
+                        "value": "F",
+                        "color": {
+                          "themeColorType": "visualizationColors",
+                          "position": 10
+                        }
+                      }
+                    ]
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 3,
+            "width": 6,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "canvasBackgroundColor": {
+        "light": "#F6FAFB",
+        "dark": "#1B1F23"
+      },
+      "widgetBackgroundColor": {
+        "light": "#FFFFFF",
+        "dark": "#2A2F35"
+      },
+      "widgetBorderColor": {
+        "light": "#D7E1E9",
+        "dark": "#3C444C"
+      },
+      "fontColor": {
+        "light": "#374151",
+        "dark": "#E4E9EE"
+      },
+      "selectionColor": {
+        "light": "#5FA8D3",
+        "dark": "#5FA8D3"
+      },
+      "visualizationColors": [
+        "#5FA8D3",
+        "#70BEE1",
+        "#89CCE7",
+        "#A1DAEC",
+        "#B3E6DC",
+        "#89C7A8",
+        "#6EAD80",
+        "#589F60",
+        "#478743",
+        "#356C2A"
+      ],
+      "widgetHeaderAlignment": "LEFT"
+    },
+    "applyModeEnabled": false
+  }
+}
